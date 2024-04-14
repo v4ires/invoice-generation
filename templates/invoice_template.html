@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice {{ data.invoice_number }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Invoice {{ data.invoice_number }}</h1>
+    <h2>From: {{ data.from_name }}</h2>
+    <p>{{ data.from_address }}</p>
+    <h2>To: {{ data.to_name }}</h2>
+    <p>{{ data.to_address }}</p>
+
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+        {% for item in data.line_items %}
+        <tr>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit_price }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Subtotal: {{ data.subtotal }}</h3>
+    <h3>Tax: {{ data.tax }}</h3>
+    <h3>Total: {{ data.total }}</h3>
+
+    <p>Payment Instructions: {{ data.payment_instructions }}</p>
+    <p>Account Owner: {{ data.account_details.owner }}</p>
+    <p>Routing Number: {{ data.account_details.routing_number }}</p>
+    <p>Account Number: {{ data.account_details.account_number }}</p>
+    <p>Bank: {{ data.account_details.bank_name }}</p>
+    <p>Bank Address: {{ data.account_details.bank_address }}</p>
+</body>
+</html>
