@@ -1,49 +1,168 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Invoice {{ data.invoice_number }}</title>
+    <title>Invoice: {{ data.invoice_number }}</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #444;
+        }
+        .header-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 28px;
+            color: #000;
+        }
+        .header-invoice {
+            text-align: right;
+            font-size: 16px;
+        }
+        .body-section {
+            padding: 20px 0;
+        }
+        .from-to-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .from-to-section div {
+            width: 45%;
+        }
+        .from-to-section h3 {
+            margin: 0 0 10px 0;
+            color: #444;
+        }
+        .from-to-section p {
+            margin: 0;
+            color: #666;
+        }
+        .table-section {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .table-section, .table-section th, .table-section td {
+            border: 1px solid #ddd;
+        }
+        .table-section th {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 8px;
+        }
+        .table-section td {
+            padding: 8px;
+            color: #333;
+        }
+        .invoice-summary {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .invoice-summary h3 {
+            margin: 0;
+            color: #333;
+        }
+        .footer-section {
+            font-size: 12px;
+            color: #666;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .footer-section h3 {
+            color: #444;
+            margin: 0 0 5px 0;
+        }
+        .footer-section p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Invoice {{ data.invoice_number }}</h1>
-    <h2>From: {{ data.from_name }}</h2>
-    <p>{{ data.from_address }}</p>
-    <h2>To: {{ data.to_name }}</h2>
-    <p>{{ data.to_address }}</p>
-
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Total</th>
-        </tr>
-        {% for item in data.line_items %}
-        <tr>
-            <td>{{ item.description }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.unit_price }}</td>
-            <td>{{ item.total }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h3>Subtotal: {{ data.subtotal }}</h3>
-    <h3>Tax: {{ data.tax }}</h3>
-    <h3>Total: {{ data.total }}</h3>
-
-    <p>Payment Instructions: {{ data.payment_instructions }}</p>
-    <p>Account Owner: {{ data.account_details.owner }}</p>
-    <p>Routing Number: {{ data.account_details.routing_number }}</p>
-    <p>Account Number: {{ data.account_details.account_number }}</p>
-    <p>Bank: {{ data.account_details.bank_name }}</p>
-    <p>Bank Address: {{ data.account_details.bank_address }}</p>
+    <div class="invoice-container">
+        <div class="header">
+            <div class="header-logo">
+                <img src="data:image/png;base64,{{ data.logo_64 }}" style="height: 50px;"/>
+                <span>{{ data.from_name }}</span>
+            </div>
+            <div class="header-invoice">
+                <h1>Invoice: {{ data.invoice_number }}</h1>
+                <p>Issued on: {{ data.issue_date }}</p>
+                <p>Due by: {{ data.due_date }}</p>
+            </div>
+        </div>
+        <div class="body-section">
+            <div class="from-to-section">
+                <div>
+                    <h3>From</h3>
+                    <p>{{ data.from_name }}</p>
+                    <p>{{ data.from_address }}</p>
+                    <p>{{ data.from_email }}</p>
+                    <p>{{ data.from_phone }}</p>
+                    <p>{{ data.from_website }}</p>
+                </div>
+                <div>
+                    <h3>To</h3>
+                    <p>{{ data.to_name }}</p>
+                    <p>{{ data.to_address }}</p>
+                    <p>{{ data.to_email }}</p>
+                    <p>{{ data.to_phone }}</p>
+                </div>
+            </div>
+            <table class="table-section">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Tax</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data.line_items %}
+                    <tr>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.unit_price }}</td>
+                        <td>{{ item.tax }}</td>
+                        <td>{{ item.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="invoice-summary">
+                <h3>Subtotal {{ data.subtotal }}</h3>
+                <h3>Tax {{ data.tax }}</h3>
+                <h3>Total {{ data.total }}</h3>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Payment Instructions</h3>
+            <p>{{ data.payment_instructions }}</p>
+            <h3>Account Details</h3>
+            <p>Owner of the account: {{ data.account_details.owner }}</p>
+            <p>ACH routing number: {{ data.account_details.routing_number }}</p>
+            <p>Wire routing number: {{ data.account_details.wire_routing_number }}</p>
+            <p>Account number: {{ data.account_details.account_number }}</p>
+            <p>Bank: {{ data.account_details.bank_name }}</p>
+            <p>Bank Address: {{ data.account_details.bank_address }}</p>
+        </div>
+    </div>
 </body>
 </html>
