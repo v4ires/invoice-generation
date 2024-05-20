@@ -1,3 +1,6 @@
-
-Jinja2==3.0.1
+jinja2==3.1.2
 pdfkit==1.0.0
+python-dotenv==1.0.0
+sendgrid==6.9.7
+schedule==1.1.0
+colorlog==6.7.0

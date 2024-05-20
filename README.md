@@ -18,4 +18,13 @@ To generate an invoice, run:
 ```
 python generate_invoice.py <path_to_invoice_data.json>
 ```
-Replace `<path_to_invoice_data.json>` with the path to your JSON file containing the invoice data.
+Replace `<path_to_invoice_data.json>` with the path to your JSON file containing the invoice data. You can run the sample.json as reference.
+
+## Email Service
+
+export SMTP_USER="your_email@gmail.com"
+export SMTP_PASSWORD="your_password"
+
+Adjust the email.json file with email parameters
+
+
