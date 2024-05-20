@@ -12,19 +12,26 @@ class EmailScheduler:
         self.logger = logger
         self.days_to_send = list(map(int, os.getenv('EMAIL_DAYS', '20,28').split(','))) 
         self.template = InvoiceTemplate('templates', self.logger)
-        self.pdf_path = f"data/invoice_{self.invoice_data['invoice_number']}.pdf"
+        self.memory=0
 
     def send_email(self):
         """Send email with invoice attachment."""
         try:
+            self.pdf_path = f"data/invoice_{self.memory}.pdf"
             email_service = EmailService(self.logger)
             email_service.send_email(self.email_config, self.pdf_path)
             self.logger.info("Email sent successfully.")
         except Exception as e:
             self.logger.error(f"Failed to send email: {e}")
-
+    
+    def get_invoice_number(self):
+        self.memory = self.memory+1
+        self.invoice_data['invoice_number']= str(self.memory) # should be persisted
+        return 
+    
     def generate_new_invoice(self):
         """Generate new invoice."""
+        self.get_invoice_number()
         self.template.generate_invoice(self.invoice_data)
     
     def generate_invoice_send_email(self):
