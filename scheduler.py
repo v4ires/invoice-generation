@@ -3,7 +3,7 @@ import time
 import os
 from datetime import datetime
 from email_service import EmailService
-from invoice_template import InvoiceTemplate
+from invoice_generator import InvoiceGenerator
 
 class EmailScheduler:
     def __init__(self, email_config, invoice_config, logger):
@@ -11,7 +11,7 @@ class EmailScheduler:
         self.invoice_data = invoice_config
         self.logger = logger
         self.days_to_send = list(map(int, os.getenv('EMAIL_DAYS', '20,28').split(','))) 
-        self.template = InvoiceTemplate('templates', self.logger)
+        self.template = InvoiceGenerator('templates', self.logger)
         self.memory=0
 
     def send_email(self):

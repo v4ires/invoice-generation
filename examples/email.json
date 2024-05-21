@@ -1,6 +1,6 @@
 {
-    "from_email": "invoicegenerator936@gmail.com",
-    "to_email": "invoicegenerator936@gmail.com",
+    "from_email": "todo@gmail.com",
+    "to_email": "todo@gmail.com",
     "subject": "Invoice Generator",
     "body": "<p>Dear recipient,</p><p>Please find attached your invoice.</p>"
   }

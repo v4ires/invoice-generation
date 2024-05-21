@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # Schedule the emails
     #scheduler.send_monthly_emails()
     # Optionally, you can use the other scheduling functions like below:
-    scheduler.send_every_x_seconds(5)
+    scheduler.send_every_x_seconds(1)
     # scheduler.send_every_x_minutes(1)
     # scheduler.send_every_x_hours(1)
     # scheduler.send_every_x_days(1)
