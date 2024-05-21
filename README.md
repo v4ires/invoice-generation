@@ -24,6 +24,7 @@ Replace `<path_to_invoice_data.json>` with the path to your JSON file containing
 
 export SMTP_USER="your_email@gmail.com"
 export SMTP_PASSWORD="your_password"
+export SENDGRID_API_KEY="your_key"
 
 Adjust the email.json file with email parameters
 
