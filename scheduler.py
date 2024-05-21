@@ -8,6 +8,7 @@ from invoice_generator import InvoiceGenerator
 class EmailScheduler:
     def __init__(self, email_config, invoice_config, logger):
         self.email_config = email_config
+        self.original_invoice_data = invoice_config.copy()  # Make a copy of the original for the dynamic logic
         self.invoice_data = invoice_config
         self.logger = logger
         self.days_to_send = list(map(int, os.getenv('EMAIL_DAYS', '20,28').split(','))) 
@@ -25,9 +26,9 @@ class EmailScheduler:
             self.logger.error(f"Failed to send email: {e}")
     
     def get_invoice_number(self):
-        self.memory = self.memory+1
-        self.invoice_data['invoice_number']= str(self.memory) # should be persisted
-        return 
+        if not self.original_invoice_data.get('invoice_number'): # should check persistency layer
+            self.memory += 1
+            self.invoice_data['invoice_number'] = str(self.memory)
     
     def generate_new_invoice(self):
         """Generate new invoice."""

@@ -291,5 +291,6 @@ pyrightconfig.json
 # Others
 data/invoice_params.json
 data/*.pdf
+data/*.pdf
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm

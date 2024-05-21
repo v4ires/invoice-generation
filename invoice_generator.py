@@ -35,7 +35,6 @@ class InvoiceGenerator:
         """
         try:
             # Dynamic invoice values
-            invoice_number = data.get('invoice_number', '0001')
             if not data.get('issue_date'):
                 data['issue_date'] = datetime.datetime.now().strftime('%Y-%m-%d')
             if not data.get('due_date'):
@@ -48,11 +47,12 @@ class InvoiceGenerator:
             os.makedirs(output_dir, exist_ok=True)
             
             # Define PDF path
-            pdf_path = os.path.join(output_dir, f"invoice_{invoice_number}.pdf")
+            print(data)
+            pdf_path = os.path.join(output_dir, f"invoice_{data['invoice_number']}.pdf")
             
             # Generate PDF
             pdfkit.from_string(html_output, pdf_path)
-            self.logger.info(f"Invoice {invoice_number} PDF generated successfully.")
+            self.logger.info(f"Invoice {data['invoice_number']} PDF generated successfully.")
         
         except KeyError as e:
             self.logger.error(f"Missing key in data: {e}")

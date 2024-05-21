@@ -1,7 +1,7 @@
 {
     "invoice_number": "",
-    "issue_date": "",
-    "due_date": "",
+    "issue_date": "22",
+    "due_date": "23",
     "from_name": "ACME Corporation",
     "from_address": "1234 Elm Street, Springfield, IL 62704, USA",
     "from_email": "billing@acme-corp.com",
