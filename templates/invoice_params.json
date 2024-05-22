@@ -1,0 +1,43 @@
+{
+    "invoice_number": "123456",
+    "issue_date": "2024-05-15",
+    "due_date": "2024-06-15",
+    "from_name": "ACME Corporation",
+    "from_address": "1234 Elm Street, Springfield, IL 62704, USA",
+    "from_email": "billing@acme-corp.com",
+    "from_phone": "+1 234 567 890",
+    "from_website": "https://www.acme-corp.com",
+    "to_name": "John Doe",
+    "to_address": "5678 Oak Avenue, Shelbyville, IL 62565, USA",
+    "to_email": "john.doe@example.com",
+    "to_phone": "+1 987 654 321",
+    "logo_64": "iVBORw0KGgoAAAANSUhEUgAAAAUA...",
+    "line_items": [
+        {
+            "description": "Product 1",
+            "quantity": 2,
+            "unit_price": 50.00,
+            "tax": 5.00,
+            "total": 110.00
+        },
+        {
+            "description": "Product 2",
+            "quantity": 1,
+            "unit_price": 75.00,
+            "tax": 7.50,
+            "total": 82.50
+        }
+    ],
+    "subtotal": 175.00,
+    "tax": 12.50,
+    "total": 187.50,
+    "payment_instructions": "Please make the payment within 30 days to avoid any late fees.",
+    "account_details": {
+        "owner": "ACME Corporation",
+        "routing_number": "123456789",
+        "wire_routing_number": "987654321",
+        "account_number": "001122334455",
+        "bank_name": "First National Bank",
+        "bank_address": "100 Main Street, Springfield, IL 62701, USA"
+    }
+}
